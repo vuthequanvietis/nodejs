@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=   , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    
+      <!-- Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="newName">Tên Học Sinh</label>
+                    <input id="newName" type="text" name="newName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="newMath">Điểm toán học</label>
+                    <input id="newMath" type="number" name="newMath" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="newPhysical">Điểm vật lý</label>
+                    <input id="newPhysical" type="number" name="newPhysical" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="newChemistry">Điểm hóa học</label>
+                    <input id="newChemistry" type="number" name="newChemistry" class="form-control">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary update">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 border">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Nhập Điểm Học Sinh
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Tên Học Sinh</label>
+                                <input id="name" type="text" name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="math">Điểm toán học</label>
+                                <input id="math" type="number" name="math" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="physical">Điểm vật lý</label>
+                                <input id="physical" type="number" name="physical" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="chemistry">Điểm hóa học</label>
+                                <input id="chemistry" type="number" name="chemistry" class="form-control">
+                            </div>
+                            <button class="btn btn-outline-primary float-right send" type="button">Nhập</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 border">
+                <div class="card">
+                    <div class="card-header">
+                        List Student
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên</th>
+                                    <th>Toán</th>
+                                    <th>Vật lý</th>
+                                    <th>Hóa học</th>
+                                    <th>Trung bình</th>
+                                    <th colspan="2">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students">
+                                <% students.forEach(function(student,index){ %>
+                                    <tr>
+                                        <td><%= index+1 %></td>
+                                        <td><%= student.name %></td>
+                                        <td><%= student.math %></td>
+                                        <td><%= student.physical %></td>
+                                        <td><%= student.chemistry %></td>
+                                        <td><%= student.average %></td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm edit" data-set="<%= student.id %>" data-toggle="modal" data-target="#updateModal">edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm remove" data-set="<%= student.id %>">remove</button>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#students').delegate('.remove','click', (e) =>{
+                let id = $(e.target).attr('data-set');
+                $.ajax({
+                    url: `http://localhost:8888/students/${id}`,
+                    type: 'DELETE', 
+                    success: (data) =>{
+                        writeData(data)
+                    }
+                })
+            })
+            $('#students').delegate('.edit','click', (e) =>{
+                let id = $(e.target).attr('data-set');
+                $.ajax({
+                    url: `http://localhost:8888/students/${id}`,
+                    type: "GET",
+                    success: (data) =>{
+                        $('#newName').val(data[0].name);
+                        $('#newMath').val(data[0].math);
+                        $('#newPhysical').val(data[0].physical);
+                        $('#newChemistry').val(data[0].chemistry);
+                        $('.update').attr('data-set',data[0].id) ;
+                    }
+                })
+            });
+
+            $('.send').click(()=>{
+                let name = $('#name').val();
+                let math = Number($('#math').val());
+                let physical = Number($('#physical').val());
+                let chemistry = Number($('#chemistry').val());
+                let avg = arr => arr.reduce((before, after) => before + after)/ arr.length;
+                let average = Math.round(avg([math, physical, chemistry]) * 10) / 10;
+                $.ajax({
+                    url: `http://localhost:8888/students`,
+                    type: 'POST',
+                    data: {
+                        name: name,
+                        math: math,
+                        physical: physical,
+                        chemistry: chemistry,
+                        average: average,
+                    },
+                    success: (data) =>{
+                        $('#name').val('');
+                        $('#math').val('');
+                        $('#physical').val('');
+                        $('#chemistry').val('');
+                        writeData(data);
+                    }
+                })
+            })
+
+            $('.update').click((e)=>{
+                let id = $(e.target).attr('data-set');
+                let name = $('#newName').val();
+                let math = Number($('#newMath').val());
+                let physical = Number($('#newPhysical').val());
+                let chemistry = Number($('#newChemistry').val());
+                let avg = arr => arr.reduce((before, after) => before + after)/ arr.length;
+                let average = Math.round(avg([math, physical, chemistry]) * 10) / 10;
+                $.ajax({
+                    url: `http://localhost:8888/students/${id}`,
+                    type: 'PUT',
+                    data: {
+                        name: name,
+                        math: math,
+                        physical: physical,
+                        chemistry: chemistry,
+                        average: average,
+                    },
+                    success: (data) =>{
+                        $('#newName').val('');
+                        $('#newMath').val('');
+                        $('#newPhysical').val('');
+                        $('#newChemistry').val('');
+                        writeData(data);
+                        $('#updateModal .close').click();
+                    }
+                })
+            })
+
+            writeData =  (data) => {
+                let dataTable = '';
+                $.each(data, (index,item)=>{
+                    dataTable+= `<tr>
+                                    <td>${index+1}</td>
+                                    <td>${item.name}</td>
+                                    <td>${item.math}</td>
+                                    <td>${item.physical}</td>
+                                    <td>${item.chemistry}</td>
+                                    <td>${item.average}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit" data-set="${item.id}" data-toggle="modal" data-target="#updateModal">edit</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm remove" data-set="${item.id}">remove</button>
+                                    </td>
+                                </tr>`
+                })
+                $('#students').html(dataTable)
+            }
+        });
+    </script>
+</body>
+</html>
