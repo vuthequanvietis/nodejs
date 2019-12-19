@@ -125,28 +125,31 @@
     <script>
         $(document).ready(function() {
             $('#students').delegate('.remove','click', (e) =>{
-                let id = $(e.target).attr('data-set');
-                $.ajax({
-                    url: `http://localhost:8888/students/${id}`,
-                    type: 'DELETE', 
-                    success: (data) =>{
-                        writeData(data)
-                    }
-                })
+                if (confirm('Are you sure?')) {
+                    let id = $(e.target).attr('data-set');
+                    $.ajax({
+                        url: `http://localhost:8888/students/${id}`,
+                        type: 'DELETE', 
+                        success: (data) =>{
+                            writeData(data)
+                        }
+                    })
+                }
             })
             $('#students').delegate('.edit','click', (e) =>{
-                let id = $(e.target).attr('data-set');
-                $.ajax({
-                    url: `http://localhost:8888/students/${id}`,
-                    type: "GET",
-                    success: (data) =>{
-                        $('#newName').val(data[0].name);
-                        $('#newMath').val(data[0].math);
-                        $('#newPhysical').val(data[0].physical);
-                        $('#newChemistry').val(data[0].chemistry);
-                        $('.update').attr('data-set',data[0].id) ;
-                    }
-                })
+                
+                    let id = $(e.target).attr('data-set');
+                    $.ajax({
+                        url: `http://localhost:8888/students/${id}`,
+                        type: "GET",
+                        success: (data) =>{
+                            $('#newName').val(data[0].name);
+                            $('#newMath').val(data[0].math);
+                            $('#newPhysical').val(data[0].physical);
+                            $('#newChemistry').val(data[0].chemistry);
+                            $('.update').attr('data-set',data[0].id) ;
+                        }
+                    })
             });
 
             $('.send').click(()=>{
